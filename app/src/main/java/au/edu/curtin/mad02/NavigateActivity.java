@@ -17,6 +17,9 @@ public class NavigateActivity extends AppCompatActivity
     private Button eastButton;
     private TextView currPosView;
     private TextView descView;
+    private TextView healthView;
+    private TextView cashView;
+    private TextView massView;
     private Player player;
     private GameMap map;
 
@@ -32,10 +35,16 @@ public class NavigateActivity extends AppCompatActivity
         eastButton = (Button) findViewById(R.id.eastButton);
         currPosView = (TextView) findViewById(R.id.positionTextView);
         descView = (TextView) findViewById(R.id.descTextView);
+        healthView = (TextView) findViewById(R.id.healthView);
+        cashView = (TextView) findViewById(R.id.cashView);
+        massView = (TextView) findViewById(R.id.massView);
 
         player = new Player();
         map = new GameMap();
         currPosView.setText(player.getPos());
+        healthView.setText("100.0/100.0");
+        cashView.setText("$0");
+        massView.setText("0.0 kg");
 
         northButton.setOnClickListener(new View.OnClickListener()
         {
@@ -45,11 +54,7 @@ public class NavigateActivity extends AppCompatActivity
                 if(player.getRow() < 2)
                 {
                     player.addRow(1);
-                    double newHealth = Math.max(0.0, player.getHealth() - 5.0 - ((double)player.getEquipMass() / 2.0));
-                    player.addHealth(newHealth);
-                    currPosView.setText(player.getPos());
-                    Area newArea = map.getArea(player.getRow(), player.getCol());
-                    setDesc(newArea);
+                    setNewConditions();
                 }
                 else
                 {
@@ -66,11 +71,7 @@ public class NavigateActivity extends AppCompatActivity
                 if(player.getRow() > 0)
                 {
                     player.addRow(-1);
-                    double newHealth = Math.max(0.0, player.getHealth() - 5.0 - ((double)player.getEquipMass() / 2.0));
-                    player.addHealth(newHealth);
-                    currPosView.setText(player.getPos());
-                    Area newArea = map.getArea(player.getRow(), player.getCol());
-                    setDesc(newArea);
+                    setNewConditions();
                 }
                 else
                 {
@@ -87,11 +88,7 @@ public class NavigateActivity extends AppCompatActivity
                 if(player.getCol() > 0)
                 {
                     player.addCol(-1);
-                    double newHealth = Math.max(0.0, player.getHealth() - 5.0 - ((double)player.getEquipMass() / 2.0));
-                    player.addHealth(newHealth);
-                    currPosView.setText(player.getPos());
-                    Area newArea = map.getArea(player.getRow(), player.getCol());
-                    setDesc(newArea);
+                    setNewConditions();
                 }
                 else
                 {
@@ -108,11 +105,7 @@ public class NavigateActivity extends AppCompatActivity
                 if(player.getCol() < 2)
                 {
                     player.addCol(1);
-                    double newHealth = Math.max(0.0, player.getHealth() - 5.0 - ((double)player.getEquipMass() / 2.0));
-                    player.addHealth(newHealth);
-                    currPosView.setText(player.getPos());
-                    Area newArea = map.getArea(player.getRow(), player.getCol());
-                    setDesc(newArea);
+                    setNewConditions();
                 }
                 else
                 {
@@ -120,6 +113,18 @@ public class NavigateActivity extends AppCompatActivity
                 }
             }
         });
+    }
+
+    public void setNewConditions()
+    {
+        double newHealth = Math.max(0.0, player.getHealth() - 5.0 - (player.getEquipMass() / 2.0));
+        player.setHealth(newHealth);
+        currPosView.setText(player.getPos());
+        Area newArea = map.getArea(player.getRow(), player.getCol());
+        setDesc(newArea);
+        healthView.setText(Double.toString(player.getHealth()) + "/100.0");
+        cashView.setText("$" + player.getCash());
+        massView.setText(Double.toString(player.getEquipMass()) + " kg");
     }
 
     public void setDesc(Area area)

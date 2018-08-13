@@ -58,9 +58,9 @@ public class Player
         return health;
     }
 
-    public void addHealth(double health)
+    public void setHealth(double health)
     {
-        this.health += health;
+        this.health = health;
     }
 
     public double getEquipMass()
