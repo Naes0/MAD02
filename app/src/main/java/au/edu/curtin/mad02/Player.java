@@ -1,9 +1,12 @@
 package au.edu.curtin.mad02;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class Player
+public class Player implements Parcelable
 {
     private int row;
     private int col;
@@ -22,6 +25,30 @@ public class Player
         this.equipMass = 0.0;
         this.equipmentlist = new ArrayList<Equipment>();
     }
+
+    protected Player(Parcel in)
+    {
+        row = in.readInt();
+        col = in.readInt();
+        cash = in.readInt();
+        health = in.readDouble();
+        equipMass = in.readDouble();
+    }
+
+    public static final Creator<Player> CREATOR = new Creator<Player>()
+    {
+        @Override
+        public Player createFromParcel(Parcel in)
+        {
+            return new Player(in);
+        }
+
+        @Override
+        public Player[] newArray(int size)
+        {
+            return new Player[size];
+        }
+    };
 
     public int getRow()
     {
@@ -95,6 +122,22 @@ public class Player
 
     public void decreaseHealth()
     {
-        setHealth();
+        setHealth(Math.max(0.0, health - 5.0 - (equipMass / 2.0)));
+    }
+
+    @Override
+    public int describeContents()
+    {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i)
+    {
+        parcel.writeInt(row);
+        parcel.writeInt(col);
+        parcel.writeInt(cash);
+        parcel.writeDouble(health);
+        parcel.writeDouble(equipMass);
     }
 }

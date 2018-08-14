@@ -2,6 +2,7 @@ package au.edu.curtin.mad02;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -119,20 +120,24 @@ public class NavigateActivity extends AppCompatActivity
             @Override
             public void onClick(View view)
             {
-                Intent intent = new Intent(NavigateActivity.this, MarketActivity.class);
-                intent.putExtra("health", player.getHealth());
-                intent.putExtra("cash", player.getCash());
-                intent.putExtra("mass", player.getEquipMass());
-                
+                Intent intent;
+                if (descView.equals("Town"))
+                {
+                    intent = new Intent(NavigateActivity.this, MarketActivity.class);
+                }
+                else
+                {
+                    intent = new Intent(NavigateActivity.this, WildernessActivity.class);
+                }
+                intent.putExtra("player", player);
                 startActivity(intent);
             }
-        }
+        });
     }
 
     public void setNewConditions()
     {
-        double newHealth = Math.max(0.0, player.getHealth() - 5.0 - (player.getEquipMass() / 2.0));
-        player.setHealth(newHealth);
+        player.decreaseHealth();
         currPosView.setText(player.getPos());
         Area newArea = map.getArea(player.getRow(), player.getCol());
         setDesc(newArea);
