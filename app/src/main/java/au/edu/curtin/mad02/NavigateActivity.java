@@ -2,12 +2,11 @@ package au.edu.curtin.mad02;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-
-import org.w3c.dom.Text;
 
 public class NavigateActivity extends AppCompatActivity
 {
@@ -15,6 +14,8 @@ public class NavigateActivity extends AppCompatActivity
     private Button southButton;
     private Button westButton;
     private Button eastButton;
+    private Button restartButton;
+    private Button optionButton;
     private TextView currPosView;
     private TextView descView;
     private TextView healthView;
@@ -29,22 +30,12 @@ public class NavigateActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_navigate);
 
-        northButton = (Button) findViewById(R.id.northButton);
-        southButton = (Button) findViewById(R.id.southButton);
-        westButton = (Button) findViewById(R.id.westButton);
-        eastButton = (Button) findViewById(R.id.eastButton);
-        currPosView = (TextView) findViewById(R.id.positionTextView);
-        descView = (TextView) findViewById(R.id.descTextView);
-        healthView = (TextView) findViewById(R.id.healthView);
-        cashView = (TextView) findViewById(R.id.cashView);
-        massView = (TextView) findViewById(R.id.massView);
-
         player = new Player();
         map = new GameMap();
-        currPosView.setText(player.getPos());
-        healthView.setText("100.0/100.0");
-        cashView.setText("$0");
-        massView.setText("0.0 kg");
+
+        playerSetup();
+        initialiseStatusBar();
+        initialiseButtons();
 
         northButton.setOnClickListener(new View.OnClickListener()
         {
@@ -113,6 +104,29 @@ public class NavigateActivity extends AppCompatActivity
                 }
             }
         });
+
+        restartButton.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                startActivity(new Intent(NavigateActivity.this, MainActivity.class));
+            }
+        });
+
+        optionButton.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                Intent intent = new Intent(NavigateActivity.this, MarketActivity.class);
+                intent.putExtra("health", player.getHealth());
+                intent.putExtra("cash", player.getCash());
+                intent.putExtra("mass", player.getEquipMass());
+                
+                startActivity(intent);
+            }
+        }
     }
 
     public void setNewConditions()
@@ -137,5 +151,35 @@ public class NavigateActivity extends AppCompatActivity
         {
             descView.setText("Wilderness");
         }
+    }
+
+    public void initialiseButtons()
+    {
+        northButton = (Button) findViewById(R.id.northButton);
+        southButton = (Button) findViewById(R.id.southButton);
+        westButton = (Button) findViewById(R.id.westButton);
+        eastButton = (Button) findViewById(R.id.eastButton);
+        restartButton = (Button) findViewById(R.id.resetButton);
+        optionButton = (Button) findViewById(R.id.optionButton);
+        currPosView = (TextView) findViewById(R.id.positionTextView);
+        descView = (TextView) findViewById(R.id.descTextView);
+        healthView = (TextView) findViewById(R.id.healthView);
+        cashView = (TextView) findViewById(R.id.cashView);
+        massView = (TextView) findViewById(R.id.massView);
+    }
+
+    public void initialiseStatusBar()
+    {
+        healthView.setText("100.0/100.0");
+        cashView.setText("$0");
+        massView.setText("0.0 kg");
+    }
+
+
+    public void playerSetup()
+    {
+        player.addEquipment(new Equipment("Sword", 10, 5));
+        player.addEquipment(new Equipment("Shield", 5, 3));
+        currPosView.setText(player.getPos());
     }
 }

@@ -87,4 +87,14 @@ public class Player
     {
         this.equipmentlist = equipmentlist;
     }
+
+    public void addEquipment(Equipment equip)
+    {
+        equipmentlist.add(equip);
+    }
+
+    public void decreaseHealth()
+    {
+        setHealth();
+    }
 }

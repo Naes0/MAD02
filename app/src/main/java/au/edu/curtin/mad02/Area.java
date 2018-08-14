@@ -23,4 +23,10 @@ public class Area
     {
         this.town = town;
     }
+
+    public void addItem(Item item)
+    {
+        itemlist.add(item);
+    }
+
 }
