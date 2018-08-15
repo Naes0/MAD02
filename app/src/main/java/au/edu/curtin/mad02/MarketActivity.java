@@ -48,10 +48,6 @@ public class MarketActivity extends AppCompatActivity
         buttonInitialise();
         setup();
         initialise();
-        currBuyIndex = 0;
-        currSellIndex = 0;
-        marketIsEmpty = itemList.isEmpty();
-        playerIsEmpty = equipmentList.isEmpty();
 
         nextBuyButton.setOnClickListener(new View.OnClickListener()
         {
@@ -94,7 +90,7 @@ public class MarketActivity extends AppCompatActivity
             @Override
             public void onClick(View view)
             {
-                if(!marketIsEmpty)
+                if((!marketIsEmpty) && (player.getCash() >= buyItem.getValue()))
                 {
                     if(buyItem instanceof Equipment)
                     {
@@ -104,14 +100,90 @@ public class MarketActivity extends AppCompatActivity
                     {
                         player.addHealth(buyItem.getMassOrHealth());
                     }
+                    player.addCash(-buyItem.getValue());
+                    if(itemList.indexOf(buyItem) == 0)
+                    {
+                        buyItem = itemList.get(currBuyIndex+1);
+
+                    }
+                    else
+                    {
+                        buyItem = itemList.get(currBuyIndex-1);
+                    }
+                    updateBuyItem();
+                    buyItem = itemList.get(currBuyIndex);
                     itemList.remove(buyItem);
-                    currBuyIndex--;
+                    if(itemList.isEmpty())
+                    {
+                        marketIsEmpty = true;
+                    }
                 }
-                if(itemList.isEmpty())
+
+                updateStatusBar();
+            }
+        });
+
+        nextSellButton.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                if(!playerIsEmpty)
                 {
-                    marketIsEmpty = true;
+                    if (currSellIndex == equipmentList.size() - 1)
+                    {
+                        currSellIndex = -1;
+                    }
+                    currSellIndex++;
+                    sellItem = equipmentList.get(currSellIndex);
+                    updateSellItem();
                 }
-                updateBuyItem();
+            }
+        });
+
+        prevSellButton.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                if(!playerIsEmpty)
+                {
+                    if(currSellIndex == 0)
+                    {
+                        currSellIndex = equipmentList.size();
+                    }
+                    currSellIndex--;
+                    sellItem = equipmentList.get(currSellIndex);
+                    updateSellItem();
+                }
+            }
+        });
+
+        sellButton.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                if(!playerIsEmpty)
+                {
+                    player.addCash(sellItem.getValue());
+                    if(equipmentList.indexOf(sellItem) == 0)
+                    {
+                        currSellIndex++;
+                    }
+                    else
+                    {
+                        currSellIndex--;
+                    }
+                    sellItem = equipmentList.get(currSellIndex);
+                    player.removeEquipment(sellItem);
+                    equipmentList.remove(sellItem);
+                    if(equipmentList.isEmpty())
+                    {
+                        playerIsEmpty = true;
+                    }
+                }
+                updateSellItem();
                 updateStatusBar();
             }
         });
@@ -134,6 +206,22 @@ public class MarketActivity extends AppCompatActivity
             descBuyView.setText("EMPTY");
             valueBuyView.setText("N/A");
             masshealthBuyView.setText("N/A");
+        }
+    }
+
+    public void updateSellItem()
+    {
+        if (!playerIsEmpty)
+        {
+            descSellView.setText(sellItem.getDesc());
+            valueSellView.setText("Value: " + sellItem.getValue());
+            massHealthSellView.setText(healthOrMass(sellItem) + Double.toString(sellItem.getMassOrHealth()));
+        }
+        else
+        {
+            descSellView.setText("EMPTY");
+            valueSellView.setText("N/A");
+            massHealthSellView.setText("N/A");
         }
     }
 
@@ -167,6 +255,10 @@ public class MarketActivity extends AppCompatActivity
         equipmentList = player.getEquipmentlist();
         buyItem = itemList.get(0);
         sellItem = equipmentList.get(0);
+        currBuyIndex = 0;
+        currSellIndex = 0;
+        marketIsEmpty = itemList.isEmpty();
+        playerIsEmpty = equipmentList.isEmpty();
     }
     public void initialise()
     {

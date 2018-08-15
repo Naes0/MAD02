@@ -88,7 +88,14 @@ public class Player implements Parcelable
 
     public void addHealth(double health)
     {
-        this.health += health;
+        if (this.health + health >= 100.0)
+        {
+            this.health = 100.0;
+        }
+        else
+        {
+            this.health += health;
+        }
     }
 
     public void setHealth(double health)
@@ -120,6 +127,11 @@ public class Player implements Parcelable
     {
         equipmentlist.add(equip);
         addEquipMass(equip.getMassOrHealth());
+    }
+    public void removeEquipment(Equipment equip)
+    {
+        equipmentlist.remove(equip);
+        addEquipMass(-equip.getMassOrHealth());
     }
 
     public void decreaseHealth()

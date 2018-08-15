@@ -184,6 +184,7 @@ public class NavigateActivity extends AppCompatActivity
     {
         player.addEquipment(new Equipment("Sword", 10, 5));
         player.addEquipment(new Equipment("Shield", 5, 3));
+        player.addCash(50);
         currPosView.setText(player.getPos());
     }
 }
