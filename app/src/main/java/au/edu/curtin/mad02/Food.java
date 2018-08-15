@@ -10,4 +10,10 @@ public class Food extends Item
         super.setDesc(desc);
         super.setValue(value);
     }
+
+    @Override
+    public double getMassOrHealth()
+    {
+        return health;
+    }
 }

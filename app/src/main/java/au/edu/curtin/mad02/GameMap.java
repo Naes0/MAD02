@@ -10,6 +10,7 @@ public class GameMap
         grid[0][0] = new Area(false);
         grid[0][1] = new Area(true);
         grid[0][1].addItem(new Food("Apple", 5, 10));
+        grid[0][1].addItem(new Equipment("Necklace", 25, 5));
         grid[0][2] = new Area(false);
         grid[1][0] = new Area(false);
         grid[1][0].addItem(new Food("Apple", 5, 10));

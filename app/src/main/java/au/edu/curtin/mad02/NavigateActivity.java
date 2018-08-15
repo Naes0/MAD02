@@ -2,7 +2,6 @@ package au.edu.curtin.mad02;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -34,9 +33,9 @@ public class NavigateActivity extends AppCompatActivity
         player = new Player();
         map = new GameMap();
 
+        initialiseButtons();
         playerSetup();
         initialiseStatusBar();
-        initialiseButtons();
 
         northButton.setOnClickListener(new View.OnClickListener()
         {
@@ -121,7 +120,7 @@ public class NavigateActivity extends AppCompatActivity
             public void onClick(View view)
             {
                 Intent intent;
-                if (descView.equals("Town"))
+                if (descView.getText().equals("Town"))
                 {
                     intent = new Intent(NavigateActivity.this, MarketActivity.class);
                 }
@@ -129,7 +128,9 @@ public class NavigateActivity extends AppCompatActivity
                 {
                     intent = new Intent(NavigateActivity.this, WildernessActivity.class);
                 }
+                //intent = new Intent(NavigateActivity.this, MarketActivity.class);
                 intent.putExtra("player", player);
+                intent.putExtra("currArea", map.getArea(player.getRow(), player.getCol()));
                 startActivity(intent);
             }
         });
@@ -179,7 +180,6 @@ public class NavigateActivity extends AppCompatActivity
         cashView.setText("$0");
         massView.setText("0.0 kg");
     }
-
 
     public void playerSetup()
     {

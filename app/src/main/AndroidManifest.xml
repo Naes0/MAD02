@@ -18,7 +18,8 @@
         </activity>
         <activity android:name=".NavigateActivity" />
         <activity android:name=".MarketActivity" />
-        <activity android:name=".WildernessActivity"></activity>
+        <activity android:name=".WildernessActivity" />
+        <activity android:name=".AbstractActivity"></activity>
     </application>
 
 </manifest>

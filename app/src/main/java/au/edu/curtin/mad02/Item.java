@@ -14,4 +14,16 @@ public abstract class Item
     {
         this.desc = desc;
     }
+
+    public abstract double getMassOrHealth();
+
+    public String getDesc()
+    {
+        return desc;
+    }
+
+    public int getValue()
+    {
+        return value;
+    }
 }

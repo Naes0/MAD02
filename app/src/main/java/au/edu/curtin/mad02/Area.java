@@ -1,9 +1,12 @@
 package au.edu.curtin.mad02;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class Area
+public class Area implements Parcelable
 {
     private boolean town;
     private List<Item> itemlist;
@@ -13,6 +16,26 @@ public class Area
         this.town = town;
         itemlist = new ArrayList<Item>();
     }
+
+    protected Area(Parcel in)
+    {
+        town = in.readByte() != 0;
+    }
+
+    public static final Creator<Area> CREATOR = new Creator<Area>()
+    {
+        @Override
+        public Area createFromParcel(Parcel in)
+        {
+            return new Area(in);
+        }
+
+        @Override
+        public Area[] newArray(int size)
+        {
+            return new Area[size];
+        }
+    };
 
     public boolean isTown()
     {
@@ -29,4 +52,21 @@ public class Area
         itemlist.add(item);
     }
 
+    public List<Item> getItemList()
+    {
+        return itemlist;
+    }
+
+
+    @Override
+    public int describeContents()
+    {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i)
+    {
+        parcel.writeByte((byte) (town ? 1 : 0));
+    }
 }

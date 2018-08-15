@@ -10,4 +10,10 @@ public class Equipment extends Item
         super.setDesc(desc);
         super.setValue(value);
     }
+
+    @Override
+    public double getMassOrHealth()
+    {
+        return mass;
+    }
 }
