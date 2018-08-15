@@ -23,6 +23,7 @@ public class NavigateActivity extends AppCompatActivity
     private TextView massView;
     private Player player;
     private GameMap map;
+    private Area currArea;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -130,7 +131,7 @@ public class NavigateActivity extends AppCompatActivity
                 }
                 //intent = new Intent(NavigateActivity.this, MarketActivity.class);
                 intent.putExtra("player", player);
-                intent.putExtra("currArea", map.getArea(player.getRow(), player.getCol()));
+                intent.putExtra("currArea", currArea);
                 startActivity(intent);
             }
         });
@@ -140,8 +141,8 @@ public class NavigateActivity extends AppCompatActivity
     {
         player.decreaseHealth();
         currPosView.setText(player.getPos());
-        Area newArea = map.getArea(player.getRow(), player.getCol());
-        setDesc(newArea);
+        currArea = map.getArea(player.getRow(), player.getCol());
+        setDesc(currArea);
         healthView.setText(Double.toString(player.getHealth()) + "/100.0");
         cashView.setText("$" + player.getCash());
         massView.setText(Double.toString(player.getEquipMass()) + " kg");
