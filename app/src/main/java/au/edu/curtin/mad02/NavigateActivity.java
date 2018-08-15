@@ -143,9 +143,7 @@ public class NavigateActivity extends AppCompatActivity
         currPosView.setText(player.getPos());
         currArea = map.getArea(player.getRow(), player.getCol());
         setDesc(currArea);
-        healthView.setText(Double.toString(player.getHealth()) + "/100.0");
-        cashView.setText("$" + player.getCash());
-        massView.setText(Double.toString(player.getEquipMass()) + " kg");
+        initialiseStatusBar();
     }
 
     public void setDesc(Area area)
@@ -177,9 +175,9 @@ public class NavigateActivity extends AppCompatActivity
 
     public void initialiseStatusBar()
     {
-        healthView.setText("100.0/100.0");
-        cashView.setText("$0");
-        massView.setText("0.0 kg");
+        healthView.setText("Health: " + Double.toString(player.getHealth()) + "/100.0");
+        cashView.setText("Cash: $" + player.getCash());
+        massView.setText("Mass: " + Double.toString(player.getEquipMass()) + " kg");
     }
 
     public void playerSetup()

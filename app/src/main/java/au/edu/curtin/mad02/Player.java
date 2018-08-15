@@ -86,6 +86,11 @@ public class Player implements Parcelable
         return health;
     }
 
+    public void addHealth(double health)
+    {
+        this.health += health;
+    }
+
     public void setHealth(double health)
     {
         this.health = health;
@@ -111,14 +116,10 @@ public class Player implements Parcelable
         return equipmentlist;
     }
 
-    public void setEquipmentlist(List<Equipment> equipmentlist)
-    {
-        this.equipmentlist = equipmentlist;
-    }
-
     public void addEquipment(Equipment equip)
     {
         equipmentlist.add(equip);
+        addEquipMass(equip.getMassOrHealth());
     }
 
     public void decreaseHealth()
