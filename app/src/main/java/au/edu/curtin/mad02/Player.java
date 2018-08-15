@@ -33,6 +33,7 @@ public class Player implements Parcelable
         cash = in.readInt();
         health = in.readDouble();
         equipMass = in.readDouble();
+        equipmentlist = in.readArrayList(Equipment.class.getClassLoader());
     }
 
     public static final Creator<Player> CREATOR = new Creator<Player>()
@@ -139,5 +140,6 @@ public class Player implements Parcelable
         parcel.writeInt(cash);
         parcel.writeDouble(health);
         parcel.writeDouble(equipMass);
+        parcel.writeList(equipmentlist);
     }
 }

@@ -80,6 +80,9 @@ public class MarketActivity extends AbstractActivity
         descBuyView.setText(itemList.get(0).getDesc());
         valueBuyView.setText("Value: " + itemList.get(0).getValue());
         masshealthBuyView.setText(healthOrMass(itemList.get(0)) + Double.toString(itemList.get(0).getMassOrHealth()));
+        descSellView.setText(player.getEquipmentlist().get(0).getDesc());
+        valueSellView.setText("Value: " + player.getEquipmentlist().get(0).getValue());
+        massHealthSellView.setText("Mass: " + player.getEquipmentlist().get(0).getMassOrHealth());
     }
 
     public String itemType(Item item)
