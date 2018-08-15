@@ -1,6 +1,9 @@
 package au.edu.curtin.mad02;
 
-public abstract class Item
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public abstract class Item implements Parcelable
 {
     private String desc;
     private int value;
@@ -25,5 +28,11 @@ public abstract class Item
     public int getValue()
     {
         return value;
+    }
+
+    public void writeToParcel(Parcel parcel, int i)
+    {
+        parcel.writeString(desc);
+        parcel.writeInt(value);
     }
 }

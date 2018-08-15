@@ -20,6 +20,7 @@ public class Area implements Parcelable
     protected Area(Parcel in)
     {
         town = in.readByte() != 0;
+        itemlist = in.readArrayList(Item.class.getClassLoader());
     }
 
     public static final Creator<Area> CREATOR = new Creator<Area>()
@@ -57,7 +58,6 @@ public class Area implements Parcelable
         return itemlist;
     }
 
-
     @Override
     public int describeContents()
     {
@@ -68,5 +68,6 @@ public class Area implements Parcelable
     public void writeToParcel(Parcel parcel, int i)
     {
         parcel.writeByte((byte) (town ? 1 : 0));
+        parcel.writeList(itemlist);
     }
 }

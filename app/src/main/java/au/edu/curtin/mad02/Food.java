@@ -1,6 +1,10 @@
 package au.edu.curtin.mad02;
 
-public class Food extends Item
+
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class Food extends Item implements Parcelable
 {
     private double health;
 
@@ -11,9 +15,44 @@ public class Food extends Item
         super.setValue(value);
     }
 
+    protected Food(Parcel in)
+    {
+        health = in.readDouble();
+        super.setDesc(in.readString());
+        super.setValue(in.readInt());
+    }
+
+    public static final Creator<Food> CREATOR = new Creator<Food>()
+    {
+        @Override
+        public Food createFromParcel(Parcel in)
+        {
+            return new Food(in);
+        }
+
+        @Override
+        public Food[] newArray(int size)
+        {
+            return new Food[size];
+        }
+    };
+
     @Override
     public double getMassOrHealth()
     {
         return health;
+    }
+
+    @Override
+    public int describeContents()
+    {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i)
+    {
+        parcel.writeDouble(health);
+        super.writeToParcel(parcel, i);
     }
 }
