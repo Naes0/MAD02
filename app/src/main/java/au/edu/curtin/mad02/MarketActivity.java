@@ -185,7 +185,10 @@ public class MarketActivity extends AppCompatActivity
             @Override
             public void onClick(View view)
             {
-
+                Intent intent = new Intent(MarketActivity.this, NavigateActivity.class);
+                intent.putExtra("player", player);
+                intent.putExtra("area", player);
+                startActivity(intent);
             }
         });
     }
