@@ -101,24 +101,18 @@ public class MarketActivity extends AppCompatActivity
                         player.addHealth(buyItem.getMassOrHealth());
                     }
                     player.addCash(-buyItem.getValue());
-                    if(itemList.indexOf(buyItem) == 0)
-                    {
-                        buyItem = itemList.get(currBuyIndex+1);
-
-                    }
-                    else
-                    {
-                        buyItem = itemList.get(currBuyIndex-1);
-                    }
-                    updateBuyItem();
-                    buyItem = itemList.get(currBuyIndex);
                     itemList.remove(buyItem);
+                    currBuyIndex = 0;
                     if(itemList.isEmpty())
                     {
                         marketIsEmpty = true;
                     }
+                    else
+                    {
+                        buyItem = itemList.get(currBuyIndex);
+                    }
                 }
-
+                updateBuyItem();
                 updateStatusBar();
             }
         });
@@ -166,21 +160,19 @@ public class MarketActivity extends AppCompatActivity
             {
                 if(!playerIsEmpty)
                 {
-                    player.addCash(sellItem.getValue());
-                    if(equipmentList.indexOf(sellItem) == 0)
-                    {
-                        currSellIndex++;
-                    }
-                    else
-                    {
-                        currSellIndex--;
-                    }
+                    player.addCash((int) ((double)sellItem.getValue() * 0.75));
                     sellItem = equipmentList.get(currSellIndex);
                     player.removeEquipment(sellItem);
                     equipmentList.remove(sellItem);
+                    area.addItem(sellItem);
+                    currSellIndex = 0;
                     if(equipmentList.isEmpty())
                     {
                         playerIsEmpty = true;
+                    }
+                    else
+                    {
+                        sellItem = equipmentList.get(currSellIndex);
                     }
                 }
                 updateSellItem();
@@ -188,7 +180,14 @@ public class MarketActivity extends AppCompatActivity
             }
         });
 
+        leaveButton.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
 
+            }
+        });
     }
 
     public void updateBuyItem()
