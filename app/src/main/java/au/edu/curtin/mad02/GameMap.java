@@ -19,8 +19,9 @@ public class GameMap
         grid[2][0] = new Area(false);
         grid[2][0].addItem(new Equipment("Boots", 6, 2));
         grid[2][1] = new Area(true);
-        grid[2][2] = new Area(false);
+        grid[2][2] = new Area(true);
         grid[2][2].addItem(new Food("Mango", 10, 25));
+        grid[2][2].addItem(new Equipment("Boots", 6, 2));
     }
 
     public Area getArea(int x, int y)

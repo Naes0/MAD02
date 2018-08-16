@@ -102,6 +102,8 @@ public class MarketActivity extends AppCompatActivity
                     }
                     player.addCash(-buyItem.getValue());
                     itemList.remove(buyItem);
+                    sellItem = equipmentList.get(0);
+                    playerIsEmpty = false;
                     currBuyIndex = 0;
                     if(itemList.isEmpty())
                     {
@@ -113,6 +115,7 @@ public class MarketActivity extends AppCompatActivity
                     }
                 }
                 updateBuyItem();
+                updateSellItem();
                 updateStatusBar();
             }
         });
@@ -165,6 +168,8 @@ public class MarketActivity extends AppCompatActivity
                     player.removeEquipment(sellItem);
                     equipmentList.remove(sellItem);
                     area.addItem(sellItem);
+                    buyItem = itemList.get(0);
+                    marketIsEmpty = false;
                     currSellIndex = 0;
                     if(equipmentList.isEmpty())
                     {
@@ -176,6 +181,7 @@ public class MarketActivity extends AppCompatActivity
                     }
                 }
                 updateSellItem();
+                updateBuyItem();
                 updateStatusBar();
             }
         });
@@ -255,23 +261,44 @@ public class MarketActivity extends AppCompatActivity
         area = intent.getParcelableExtra("currArea");
         itemList = area.getItemList();
         equipmentList = player.getEquipmentlist();
-        buyItem = itemList.get(0);
-        sellItem = equipmentList.get(0);
-        currBuyIndex = 0;
-        currSellIndex = 0;
         marketIsEmpty = itemList.isEmpty();
         playerIsEmpty = equipmentList.isEmpty();
+        if(!marketIsEmpty)
+        {
+            buyItem = itemList.get(0);
+        }
+        if (!playerIsEmpty)
+        {
+            sellItem = equipmentList.get(0);
+        }
+        currBuyIndex = 0;
+        currSellIndex = 0;
     }
+
     public void initialise()
     {
         updateStatusBar();
-        itemTypeBuyView.setText(itemType(buyItem));
-        descBuyView.setText(buyItem.getDesc());
-        valueBuyView.setText("Value: " + buyItem.getValue());
-        masshealthBuyView.setText(healthOrMass(buyItem) + Double.toString(buyItem.getMassOrHealth()));
-        descSellView.setText(sellItem.getDesc());
-        valueSellView.setText("Value: " + sellItem.getValue());
-        massHealthSellView.setText("Mass: " + sellItem.getMassOrHealth());
+        if (!marketIsEmpty)
+        {
+            itemTypeBuyView.setText(itemType(buyItem));
+            descBuyView.setText(buyItem.getDesc());
+            valueBuyView.setText("Value: " + buyItem.getValue());
+            masshealthBuyView.setText(healthOrMass(buyItem) + Double.toString(buyItem.getMassOrHealth()));
+        }
+        else
+        {
+            updateBuyItem();
+        }
+        if(!playerIsEmpty)
+        {
+            descSellView.setText(sellItem.getDesc());
+            valueSellView.setText("Value: " + sellItem.getValue());
+            massHealthSellView.setText("Mass: " + sellItem.getMassOrHealth());
+        }
+        else
+        {
+            updateSellItem();
+        }
     }
 
     public void updateStatusBar()

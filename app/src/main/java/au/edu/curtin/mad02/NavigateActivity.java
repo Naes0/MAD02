@@ -186,5 +186,7 @@ public class NavigateActivity extends AppCompatActivity
         player.addEquipment(new Equipment("Shield", 5, 3));
         player.addCash(50);
         currPosView.setText(player.getPos());
+        currArea = map.getArea(player.getRow(), player.getCol());
+        setDesc(currArea);
     }
 }
