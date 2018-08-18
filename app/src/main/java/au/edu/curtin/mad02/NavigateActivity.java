@@ -166,7 +166,14 @@ public class NavigateActivity extends AppCompatActivity
         currPosView.setText(player.getPos());
         currArea = map.getArea(player.getRow(), player.getCol());
         setDesc(currArea);
-
+        if(currArea.isTown())
+        {
+            layout.setBackgroundResource(R.drawable.town);
+        }
+        else
+        {
+            layout.setBackgroundResource(R.drawable.wilderness2);
+        }
         updateStatusBar();
     }
 
@@ -195,11 +202,19 @@ public class NavigateActivity extends AppCompatActivity
         healthView = (TextView) findViewById(R.id.healthView);
         cashView = (TextView) findViewById(R.id.cashView);
         massView = (TextView) findViewById(R.id.massView);
-        layout = (ConstraintLayout) findViewById(R.id.)
+        layout = (ConstraintLayout) findViewById(R.id.navLayout);
     }
 
     public void updateStatusBar()
     {
+        if(currArea.isTown())
+        {
+            layout.setBackgroundResource(R.drawable.town);
+        }
+        else
+        {
+            layout.setBackgroundResource(R.drawable.wilderness2);
+        }
         healthView.setText("Health: " + Double.toString(player.getHealth()) + "/100.0");
         cashView.setText("Cash: $" + player.getCash());
         massView.setText("Mass: " + Double.toString(player.getEquipMass()) + " kg");

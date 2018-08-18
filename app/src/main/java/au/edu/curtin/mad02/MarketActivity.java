@@ -5,9 +5,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -117,6 +119,7 @@ public class MarketActivity extends AppCompatActivity
                 }
                 updateBuyItem();
                 updateSellItem();
+                checkWin();
                 updateStatusBar();
             }
         });
@@ -167,7 +170,6 @@ public class MarketActivity extends AppCompatActivity
                     player.addCash((int) ((double)sellItem.getValue() * 0.75));
                     sellItem = equipmentList.get(currSellIndex);
                     player.removeEquipment(sellItem);
-                    equipmentList.remove(sellItem);
                     area.addItem(sellItem);
                     buyItem = itemList.get(0);
                     marketIsEmpty = false;
@@ -183,6 +185,7 @@ public class MarketActivity extends AppCompatActivity
                 }
                 updateSellItem();
                 updateBuyItem();
+                checkWin();
                 updateStatusBar();
             }
         });
@@ -331,6 +334,35 @@ public class MarketActivity extends AppCompatActivity
         else
         {
             return "Health: ";
+        }
+    }
+
+    public void checkWin()
+    {
+        boolean sword = false;
+        boolean shield = false;
+        boolean necklace = false;
+        Context context = getApplicationContext();
+        Toast toast = Toast.makeText(context, "You Win!", Toast.LENGTH_LONG);
+        toast.setGravity(Gravity.CENTER, 0, 0);
+        for(Equipment eq : equipmentList)
+        {
+            if(!sword)
+            {
+                sword = eq.getDesc().equals("Sword");
+            }
+            if(!shield)
+            {
+                shield = eq.getDesc().equals("Shield");
+            }
+            if(!necklace)
+            {
+                necklace = eq.getDesc().equals("Necklace");
+            }
+        }
+        if(sword && shield && necklace)
+        {
+            toast.show();
         }
     }
 }
