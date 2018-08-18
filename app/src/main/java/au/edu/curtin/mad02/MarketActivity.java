@@ -2,6 +2,7 @@ package au.edu.curtin.mad02;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -191,10 +192,11 @@ public class MarketActivity extends AppCompatActivity
             @Override
             public void onClick(View view)
             {
-                Intent intent = new Intent(MarketActivity.this, NavigateActivity.class);
+                Intent intent = new Intent();
                 intent.putExtra("player", player);
                 intent.putExtra("area", player);
-                startActivity(intent);
+                setResult(RESULT_OK, intent);
+                NavigateActivity.
             }
         });
     }
@@ -273,6 +275,14 @@ public class MarketActivity extends AppCompatActivity
         }
         currBuyIndex = 0;
         currSellIndex = 0;
+    }
+
+    public static Intent getIntent(Context c, Player play, Area currArea)
+    {
+        Intent intent = new Intent(c, MarketActivity.class);
+        intent.putExtra("Player", play);
+        intent.putExtra("Area", currArea);
+        return intent;
     }
 
     public void initialise()

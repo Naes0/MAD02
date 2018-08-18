@@ -24,6 +24,7 @@ public class NavigateActivity extends AppCompatActivity
     private Player player;
     private GameMap map;
     private Area currArea;
+    private static final int REQUEST_CODE_MARKET = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -36,7 +37,7 @@ public class NavigateActivity extends AppCompatActivity
 
         initialiseButtons();
         playerSetup();
-        initialiseStatusBar();
+        updateStatusBar();
 
         northButton.setOnClickListener(new View.OnClickListener()
         {
@@ -129,12 +130,22 @@ public class NavigateActivity extends AppCompatActivity
                 {
                     intent = new Intent(NavigateActivity.this, WildernessActivity.class);
                 }
-                //intent = new Intent(NavigateActivity.this, MarketActivity.class);
                 intent.putExtra("player", player);
                 intent.putExtra("currArea", currArea);
-                startActivity(intent);
+                startActivityForResult(intent, REQUEST_CODE_MARKET);
             }
         });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent returnData)
+    {
+        if (requestCode == REQUEST_CODE_MARKET && resultCode == RESULT_OK)
+        {
+            player = returnData.getParcelableExtra("player");
+            currArea = returnData.getParcelableExtra("area");
+        }
+        updateStatusBar();
     }
 
     public void setNewConditions()
@@ -143,7 +154,7 @@ public class NavigateActivity extends AppCompatActivity
         currPosView.setText(player.getPos());
         currArea = map.getArea(player.getRow(), player.getCol());
         setDesc(currArea);
-        initialiseStatusBar();
+        updateStatusBar();
     }
 
     public void setDesc(Area area)
@@ -173,7 +184,7 @@ public class NavigateActivity extends AppCompatActivity
         massView = (TextView) findViewById(R.id.massView);
     }
 
-    public void initialiseStatusBar()
+    public void updateStatusBar()
     {
         healthView.setText("Health: " + Double.toString(player.getHealth()) + "/100.0");
         cashView.setText("Cash: $" + player.getCash());
