@@ -28,4 +28,8 @@ public class GameMap
     {
         return grid[x][y];
     }
+    public void setArea(int x, int y, Area area)
+    {
+        grid[x][y] = area;
+    }
 }

@@ -1,6 +1,7 @@
 package au.edu.curtin.mad02;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 
 public class NavigateActivity extends AppCompatActivity
 {
+    private ConstraintLayout layout;
     private Button northButton;
     private Button southButton;
     private Button westButton;
@@ -25,6 +27,7 @@ public class NavigateActivity extends AppCompatActivity
     private GameMap map;
     private Area currArea;
     private static final int REQUEST_CODE_MARKET = 0;
+    private static final int REQUEST_CODE_WILDERNESS = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -132,7 +135,15 @@ public class NavigateActivity extends AppCompatActivity
                 }
                 intent.putExtra("player", player);
                 intent.putExtra("currArea", currArea);
-                startActivityForResult(intent, REQUEST_CODE_MARKET);
+                if (descView.getText().equals("Town"))
+                {
+                    startActivityForResult(intent, REQUEST_CODE_MARKET);
+                }
+                else
+                {
+                    startActivityForResult(intent, REQUEST_CODE_WILDERNESS);
+                }
+
             }
         });
     }
@@ -140,10 +151,11 @@ public class NavigateActivity extends AppCompatActivity
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent returnData)
     {
-        if (requestCode == REQUEST_CODE_MARKET && resultCode == RESULT_OK)
+        if ((requestCode == REQUEST_CODE_MARKET || requestCode == REQUEST_CODE_WILDERNESS) && resultCode == RESULT_OK)
         {
             player = returnData.getParcelableExtra("player");
             currArea = returnData.getParcelableExtra("area");
+            map.setArea(player.getRow(), player.getCol(), currArea);
         }
         updateStatusBar();
     }
@@ -154,6 +166,7 @@ public class NavigateActivity extends AppCompatActivity
         currPosView.setText(player.getPos());
         currArea = map.getArea(player.getRow(), player.getCol());
         setDesc(currArea);
+
         updateStatusBar();
     }
 
@@ -182,6 +195,7 @@ public class NavigateActivity extends AppCompatActivity
         healthView = (TextView) findViewById(R.id.healthView);
         cashView = (TextView) findViewById(R.id.cashView);
         massView = (TextView) findViewById(R.id.massView);
+        layout = (ConstraintLayout) findViewById(R.id.)
     }
 
     public void updateStatusBar()

@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/navigate"
     tools:context=".NavigateActivity"
     tools:layout_editor_absoluteY="81dp">
 
@@ -13,6 +14,7 @@
         android:layout_height="0dp"
         android:layout_marginBottom="10dp"
         android:text="Current Position"
+        android:textColor="#FFFFFF"
         android:textAppearance="@style/TextAppearance.AppCompat.Headline"
         app:layout_constraintBottom_toTopOf="@+id/positionTextView"
         app:layout_constraintEnd_toEndOf="parent"
@@ -27,6 +29,7 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Headline"
         app:layout_constraintBottom_toTopOf="@+id/optionButton"
         app:layout_constraintEnd_toEndOf="parent"
+        android:textColor="#FFFFFF"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/positionTextView" />
 
@@ -40,6 +43,7 @@
         android:layout_marginRight="8dp"
         android:layout_marginBottom="10dp"
         android:gravity="center"
+        android:textColor="#FFFFFF"
         android:textAppearance="@style/TextAppearance.AppCompat.Headline"
         app:layout_constraintBottom_toTopOf="@+id/descTextView"
         app:layout_constraintEnd_toEndOf="parent"
@@ -128,7 +132,7 @@
         android:layout_marginBottom="15dp"
         android:text="Navigate"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-        android:textColor="#000000"
+        android:textColor="#FFFFFF"
         app:layout_constraintBottom_toTopOf="@+id/currentPosTitle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -176,6 +180,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:textColor="#FFFFFF"
             android:text="TextView" />
 
         <TextView
@@ -183,6 +188,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:textColor="#FFFFFF"
             android:text="TextView" />
 
         <TextView
@@ -190,6 +196,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:textColor="#FFFFFF"
             android:text="TextView" />
     </LinearLayout>
 

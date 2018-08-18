@@ -194,9 +194,9 @@ public class MarketActivity extends AppCompatActivity
             {
                 Intent intent = new Intent();
                 intent.putExtra("player", player);
-                intent.putExtra("area", player);
+                intent.putExtra("area", area);
                 setResult(RESULT_OK, intent);
-                NavigateActivity.
+                finish();
             }
         });
     }
@@ -275,14 +275,6 @@ public class MarketActivity extends AppCompatActivity
         }
         currBuyIndex = 0;
         currSellIndex = 0;
-    }
-
-    public static Intent getIntent(Context c, Player play, Area currArea)
-    {
-        Intent intent = new Intent(c, MarketActivity.class);
-        intent.putExtra("Player", play);
-        intent.putExtra("Area", currArea);
-        return intent;
     }
 
     public void initialise()
