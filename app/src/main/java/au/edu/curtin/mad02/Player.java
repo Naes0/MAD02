@@ -2,7 +2,6 @@ package au.edu.curtin.mad02;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -128,15 +127,20 @@ public class Player implements Parcelable
         equipmentlist.add(equip);
         addEquipMass(equip.getMassOrHealth());
     }
+
     public void removeEquipment(Equipment equip)
     {
         equipmentlist.remove(equip);
         addEquipMass(-equip.getMassOrHealth());
     }
 
-    public void decreaseHealth()
+    public void decreaseHealth() throws DecreaseHealthException
     {
         setHealth(Math.max(0.0, health - 5.0 - (equipMass / 2.0)));
+        if (health <= 0.0)
+        {
+            throw new DecreaseHealthException("Health is 0");
+        }
     }
 
     @Override

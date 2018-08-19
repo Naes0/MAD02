@@ -3,11 +3,14 @@ package au.edu.curtin.mad02;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class NavigateActivity extends AppCompatActivity
 {
@@ -162,7 +165,18 @@ public class NavigateActivity extends AppCompatActivity
 
     public void setNewConditions()
     {
-        player.decreaseHealth();
+        try
+        {
+            player.decreaseHealth();
+        }
+        catch (DecreaseHealthException e)
+        {
+            Context context = getApplicationContext();
+            Toast toast = Toast.makeText(context, "You Lose", Toast.LENGTH_LONG);
+            toast.setGravity(Gravity.CENTER, 0, 0);
+            toast.show();
+            startActivity(new Intent(NavigateActivity.this, MainActivity.class));
+        }
         currPosView.setText(player.getPos());
         currArea = map.getArea(player.getRow(), player.getCol());
         setDesc(currArea);
