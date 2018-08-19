@@ -29,10 +29,11 @@
 
             <TextView
                 android:id="@+id/BuyingTitle"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="41dp"
                 android:paddingHorizontal="20dp"
                 android:text="Found"
+                android:gravity="center"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body2"
                 android:textColor="#FFFFFF"
                 android:textSize="20dp" />
@@ -78,7 +79,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="96dp"
+                android:layout_height="107dp"
                 android:orientation="horizontal">
 
                 <Button
@@ -118,6 +119,7 @@
                 android:layout_height="41dp"
                 android:paddingHorizontal="20dp"
                 android:text="Drop"
+                android:gravity="center"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body2"
                 android:textColor="#FFFFFF"
                 android:textSize="20dp" />
@@ -163,7 +165,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="96dp"
+                android:layout_height="107dp"
                 android:orientation="horizontal">
 
                 <Button
