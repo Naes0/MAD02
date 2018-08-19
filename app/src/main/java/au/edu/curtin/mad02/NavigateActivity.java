@@ -149,6 +149,24 @@ public class NavigateActivity extends AppCompatActivity
 
             }
         });
+
+        if (savedInstanceState != null)
+        {
+            player = savedInstanceState.getParcelable("Player");
+            currArea = savedInstanceState.getParcelable("Area");
+            currPosView.setText(player.getPos());
+            setDesc(currArea);
+            updateStatusBar();
+        }
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState)
+    {
+        super.onSaveInstanceState(outState);
+
+        outState.putParcelable("Player", player);
+        outState.putParcelable("Area", currArea);
     }
 
     @Override

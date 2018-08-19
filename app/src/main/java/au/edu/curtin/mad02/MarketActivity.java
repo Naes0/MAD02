@@ -202,6 +202,24 @@ public class MarketActivity extends AppCompatActivity
                 finish();
             }
         });
+
+        if (savedInstanceState != null)
+        {
+            player = savedInstanceState.getParcelable("Player");
+            area = savedInstanceState.getParcelable("Area");
+            updateSellItem();
+            updateBuyItem();
+            updateStatusBar();
+        }
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState)
+    {
+        super.onSaveInstanceState(outState);
+
+        outState.putParcelable("Player", player);
+        outState.putParcelable("Area", area);
     }
 
     public void updateBuyItem()
