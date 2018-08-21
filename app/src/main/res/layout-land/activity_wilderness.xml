@@ -18,22 +18,24 @@
         android:textColor="#FFFFFF" />
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="271dp"
-        android:orientation="horizontal">
+        android:layout_width="fill_parent"
+        android:layout_height="287dp"
+        android:orientation="horizontal"
+        android:weightSum="2">
 
         <LinearLayout
-            android:layout_width="345dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_weight="1">
 
             <TextView
                 android:id="@+id/BuyingTitle"
                 android:layout_width="match_parent"
                 android:layout_height="41dp"
+                android:gravity="center"
                 android:paddingHorizontal="20dp"
                 android:text="Found"
-                android:gravity="center"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body2"
                 android:textColor="#FFFFFF"
                 android:textSize="20dp" />
@@ -59,7 +61,7 @@
 
             <TextView
                 android:id="@+id/valueBuyView"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingHorizontal="60dp"
                 android:text="Value: "
@@ -69,7 +71,7 @@
 
             <TextView
                 android:id="@+id/massOrHealthBuyView"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingHorizontal="60dp"
                 android:text="mass/health: "
@@ -79,7 +81,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="107dp"
+                android:layout_height="120dp"
                 android:orientation="horizontal">
 
                 <Button
@@ -109,17 +111,18 @@
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="345dp"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_weight="1">
 
             <TextView
                 android:id="@+id/sellingTitle"
                 android:layout_width="match_parent"
                 android:layout_height="41dp"
+                android:gravity="center"
                 android:paddingHorizontal="20dp"
                 android:text="Drop"
-                android:gravity="center"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body2"
                 android:textColor="#FFFFFF"
                 android:textSize="20dp" />
@@ -165,7 +168,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="107dp"
+                android:layout_height="120dp"
                 android:orientation="horizontal">
 
                 <Button
@@ -197,7 +200,7 @@
     <Button
         android:id="@+id/leaveButton"
         android:layout_width="100dp"
-        android:layout_height="50dp"
+        android:layout_height="58dp"
         android:layout_gravity="center"
         android:text="Leave" />
 
