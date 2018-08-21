@@ -43,6 +43,18 @@ public class Equipment extends Item implements Parcelable
     }
 
     @Override
+    public String getStringType()
+    {
+        return "Equipment";
+    }
+
+    @Override
+    public String getStringHealthMass()
+    {
+        return "Mass: ";
+    }
+
+    @Override
     public int describeContents()
     {
         return 0;

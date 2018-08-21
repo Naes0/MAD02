@@ -44,6 +44,18 @@ public class Food extends Item implements Parcelable
     }
 
     @Override
+    public String getStringType()
+    {
+        return "Food";
+    }
+
+    @Override
+    public String getStringHealthMass()
+    {
+        return "Health: ";
+    }
+
+    @Override
     public int describeContents()
     {
         return 0;

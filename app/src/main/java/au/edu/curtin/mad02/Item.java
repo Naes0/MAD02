@@ -18,8 +18,6 @@ public abstract class Item implements Parcelable
         this.desc = desc;
     }
 
-    public abstract double getMassOrHealth();
-
     public String getDesc()
     {
         return desc;
@@ -35,4 +33,7 @@ public abstract class Item implements Parcelable
         parcel.writeString(desc);
         parcel.writeInt(value);
     }
+    public abstract double getMassOrHealth();
+    public abstract String getStringType();
+    public abstract String getStringHealthMass();
 }

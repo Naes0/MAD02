@@ -226,10 +226,10 @@ public class WildernessActivity extends AppCompatActivity
     {
         if (!marketIsEmpty)
         {
-            itemTypeBuyView.setText(itemType(buyItem));
+            itemTypeBuyView.setText(buyItem.getStringType());
             descBuyView.setText(buyItem.getDesc());
             valueBuyView.setText("Value: " + buyItem.getValue());
-            masshealthBuyView.setText(healthOrMass(buyItem) + Double.toString(buyItem.getMassOrHealth()));
+            masshealthBuyView.setText(buyItem.getStringHealthMass() + Double.toString(buyItem.getMassOrHealth()));
         }
         else
         {
@@ -246,7 +246,7 @@ public class WildernessActivity extends AppCompatActivity
         {
             descSellView.setText(sellItem.getDesc());
             valueSellView.setText("Value: " + sellItem.getValue());
-            massHealthSellView.setText(healthOrMass(sellItem) + Double.toString(sellItem.getMassOrHealth()));
+            massHealthSellView.setText(sellItem.getStringHealthMass() + Double.toString(sellItem.getMassOrHealth()));
         }
         else
         {
@@ -303,10 +303,10 @@ public class WildernessActivity extends AppCompatActivity
         updateStatusBar();
         if (!marketIsEmpty)
         {
-            itemTypeBuyView.setText(itemType(buyItem));
+            itemTypeBuyView.setText(buyItem.getStringType());
             descBuyView.setText(buyItem.getDesc());
             valueBuyView.setText("Value: " + buyItem.getValue());
-            masshealthBuyView.setText(healthOrMass(buyItem) + Double.toString(buyItem.getMassOrHealth()));
+            masshealthBuyView.setText(buyItem.getStringHealthMass() + Double.toString(buyItem.getMassOrHealth()));
         }
         else
         {
@@ -329,30 +329,6 @@ public class WildernessActivity extends AppCompatActivity
         healthView.setText("Health: " + Double.toString(player.getHealth()) + "/100.0");
         cashView.setText("Cash: $" + player.getCash());
         massView.setText("Mass: " + Double.toString(player.getEquipMass()) + " kg");
-    }
-
-    public String itemType(Item item)
-    {
-        if (item instanceof Equipment)
-        {
-            return "Equipment";
-        }
-        else
-        {
-            return "Food";
-        }
-    }
-
-    public String healthOrMass(Item item)
-    {
-        if (item instanceof Equipment)
-        {
-            return "Mass: ";
-        }
-        else
-        {
-            return "Health: ";
-        }
     }
 
     public void checkWin()
