@@ -73,12 +73,16 @@
         android:id="@+id/westButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="208dp"
-        android:layout_marginLeft="208dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
         android:layout_marginTop="44dp"
+        android:layout_marginEnd="2dp"
+        android:layout_marginRight="2dp"
         android:layout_marginBottom="44dp"
         android:text="West"
         app:layout_constraintBottom_toBottomOf="@+id/southButton"
+        app:layout_constraintEnd_toStartOf="@+id/northButton"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/northButton"
         app:layout_constraintVertical_bias="0.0" />
@@ -108,7 +112,7 @@
         android:text="East"
         app:layout_constraintBottom_toTopOf="@+id/southButton"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.29"
+        app:layout_constraintHorizontal_bias="0.289"
         app:layout_constraintStart_toEndOf="@+id/westButton"
         app:layout_constraintTop_toBottomOf="@+id/positionTextView" />
 
